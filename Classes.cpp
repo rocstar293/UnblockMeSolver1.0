@@ -125,10 +125,10 @@ void Gameboard::GoToState(std::string _state)
 	UpdateBlocks();
 }
 
-void Gameboard::Solve()
+void Gameboard::Solve(bool debug)
 {
 	std::pair<std::string, std::string> prev_state = SaveState("First");
-	
+
 	while (true)
 	{
 		movecount++;
@@ -139,10 +139,12 @@ void Gameboard::Solve()
 			std::cout << "Already Solved!" << std::endl;
 			return;
 		}
-
+		
+		int new_gamestates = 0;
+		
 		while (gamestate_it != gamestate_history.end())
 		{
-			if (gamestate_it->second.first == movecount-1)
+			if (gamestate_it->second.first == movecount - 1)
 			{
 				GoToState(gamestate_it->first);
 				prev_state = { gamestate_it->first , gamestate_it->first };
@@ -157,8 +159,14 @@ void Gameboard::Solve()
 						{
 							std::pair<std::string, std::string> current_state = SaveState(prev_state.second);
 
-							std::cout << " -------- " << std::endl;
-							PrintBoard();
+							if (debug == true)
+							{
+								std::cout << " -------- " << std::endl;
+								PrintBoard();
+							}
+
+							new_gamestates++;
+
 
 							if (QuerySolved())
 							{
@@ -172,6 +180,11 @@ void Gameboard::Solve()
 				}
 			}
 			gamestate_it++;
+		}
+		if (new_gamestates == 0)
+		{
+			std::cout << "=== No Solution ===" << std::endl;
+			return;
 		}
 	}
 }

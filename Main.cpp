@@ -14,6 +14,16 @@ int main()
 	};
 	*/
 
+	std::vector<std::vector<char>> TestArray = {
+	{ '-', '-', 'A', 'B', 'B', '-' },
+	{ '#', '#', 'A', 'C', 'H', '-' },
+	{ 'D', 'D', 'D', 'C', 'H', 'F' },
+	{ '-', '-', '-', 'I', 'I', 'F' },
+	{ '-', '-', '-', 'E', '-', 'F' },
+	{ '-', '-', '-', 'E', 'G', 'G' }
+	};
+
+
 	Gameboard Test(TestArray);
 	
 	Test.Solve();

@@ -39,7 +39,7 @@ public:
 	void GoToState(std::string _state);
 	bool QuerySolved();
 	bool QueryDuplicateMove();
-	void Solve();
+	void Solve(bool debug = false);
 	void PrintBoard();
 	void PrintSolution(std::pair<std::string, std::string> _solved_state);
 
